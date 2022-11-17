@@ -1,23 +1,24 @@
 import logo from './logo.svg';
 import './App.css';
+import { BrowserRouter, Routes, Route } from "react-router-dom"
+import { SearchBarInputContext } from './Contexts/SearchBarInputContext';
+import { useState } from 'react';
+import CharacterDetails from './components/CharacterDetails/CharacterDetails';
+import CharactersList from './components/CharactersList/CharactersList';
 
 function App() {
+  const [character, setCharacter] = useState("");
+  const searchInput = {character: character, setCharacter: setCharacter}
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <SearchBarInputContext.Provider value={searchInput}>
+        <BrowserRouter>
+          <Routes>
+            <Route path="" element={<CharactersList />} />
+            <Route path="/character/:id" element={<CharacterDetails />} />
+          </Routes>
+        </BrowserRouter>
+      </SearchBarInputContext.Provider>
     </div>
   );
 }
