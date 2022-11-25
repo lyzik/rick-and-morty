@@ -1,16 +1,15 @@
 import React from "react";
-import { useContext } from "react";
-import { SearchBarInputContext } from "../../Contexts/SearchBarInputContext";
 import * as Styled from "./SearchBar.styles"
 
-const SearchBar = () => {
-    const { character, setCharacter } = useContext(SearchBarInputContext)
+const SearchBar = ({setSearch, searchPhrase}) => {
     return (
     <Styled.Container>
-        <Styled.Input type="text" onChange={event => setCharacter(event.target.value)} value={character}
+        <Styled.Input type="text" onChange={event => setSearch(event.target.value)} value={searchPhrase}
             placeholder="Search for character" />
     </Styled.Container>
     )
 }
 
 export default SearchBar
+
+// store/redux <=> SearchBarContainer <=> SearchBar

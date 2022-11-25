@@ -1,22 +1,20 @@
 import React, { useContext } from "react";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { SearchBarInputContext } from "../../Contexts/SearchBarInputContext";
 import CharactersListElement from "../CharactersListElement/CharactersListElement";
-import SearchBar from "../SearchBar/SearchBar";
-import SearchEngine from "../SearchEngine/SearchEngine";
+import SearchBar from "../SearchBar/SearchBarContainer";
+import SearchEngine from "../SearchEngine/SearchEngineContainer";
 import * as Styled from "./CharactersList.styles"
 
 
-const CharactersList = () => {
+const CharactersList = ( {input, charactersToShow, setCharactersToShow, page, setPage} ) => {
 
-    const [characters, setCharacters] = useState([])
-    const [page, setPage] = useState(1)
-    const [searchType, setSearchType] = useState('name')
-    const input = useContext(SearchBarInputContext).character
-    
     function LoadMoreCharacters(){
         setPage(page + 1)
+    }
+    
+    function SetChar(){
+        setCharactersToShow([])
     }
     
     useEffect(() => {
@@ -30,21 +28,22 @@ const CharactersList = () => {
                 throw new Error("Server responds with error!")
             }
         })
-        .then(data => {setCharacters(characters.concat(data.results))})
+        .then(data => {
+            setCharactersToShow(charactersToShow.concat(data.results))    
+        }) // to do Reduxa
     }, [page])
-
-    
 
     return (
         <>
         <div>
-            <SearchEngine props={{characters, setCharacters, LoadMoreCharacters, setPage}}/>
+            <SearchEngine/>
             <SearchBar />        
             <Styled.Container>
                 {
-                    characters ? characters.map(character => 
+                    charactersToShow ? charactersToShow.map(character => 
                         ( 
-                            <Link key={character.id} to={`/character/${character.id}`} style={{textDecoration: "none"}}>
+                            <Link key={character.id} to={`/character/${character.id}`} style={{textDecoration: "none"}}
+                            onClick={SetChar}>
                                 <CharactersListElement character={character}/>
                             </Link>
                         )) : <h1>Character does not exist</h1>
