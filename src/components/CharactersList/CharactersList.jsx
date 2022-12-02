@@ -7,30 +7,32 @@ import SearchEngine from "../SearchEngine/SearchEngineContainer";
 import * as Styled from "./CharactersList.styles"
 
 
-const CharactersList = ( {input, charactersToShow, setCharactersToShow, page, setPage} ) => {
+const CharactersList = ( {input, charactersToShow, setCharactersToShow, page, setPage, loadCharacters} ) => {
 
     function LoadMoreCharacters(){
         setPage(page + 1)
     }
     
-    function SetChar(){
+    function ResetCharacters(){
         setCharactersToShow([])
     }
     
     useEffect(() => {
-        const endpoint = `https://rickandmortyapi.com/api/character?page=${page}&name=${input}`
+        loadCharacters(page, input)
 
-        fetch(endpoint)
-        .then(response => {
-            if(response.status < 400){
-                return response.json()
-            }else{
-                throw new Error("Server responds with error!")
-            }
-        })
-        .then(data => {
-            setCharactersToShow(charactersToShow.concat(data.results))    
-        }) // to do Reduxa
+        //const endpoint = `https://rickandmortyapi.com/api/character?page=${page}&name=${input}`
+
+        //fetch(endpoint)
+        //.then(response => {
+        //    if(response.status < 400){
+        //        return response.json()
+        //    }else{
+        //        throw new Error("Server responds with error!");
+        //    }
+        //})
+        //.then(data => {
+        //    setCharactersToShow(charactersToShow.concat(data.results))    
+        //}) 
     }, [page])
 
     return (
@@ -43,7 +45,7 @@ const CharactersList = ( {input, charactersToShow, setCharactersToShow, page, se
                     charactersToShow ? charactersToShow.map(character => 
                         ( 
                             <Link key={character.id} to={`/character/${character.id}`} style={{textDecoration: "none"}}
-                            onClick={SetChar}>
+                            onClick={ResetCharacters}>
                                 <CharactersListElement character={character}/>
                             </Link>
                         )) : <h1>Character does not exist</h1>

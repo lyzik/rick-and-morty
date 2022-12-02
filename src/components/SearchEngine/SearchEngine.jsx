@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react"
+import { useEffect } from "react"
 
 const SearchEngine = ( {setCharactersToShow, input, setPage} ) => {
     useEffect(() => {
@@ -6,12 +6,11 @@ const SearchEngine = ( {setCharactersToShow, input, setPage} ) => {
         fetch(endpoint)
         .then(response => response.json())
         .then(setPage(1))
-        .then(data => setCharactersToShow(data.results))
+        .then(data => /*setCharactersToShow(data.results)*/{})
+        .catch(() => {
+            setCharactersToShow(null)
+        })
     }, [input])
-    /*
-    1. matches(character, phrase) => true/false 
-    2. 20 => wyswietl, jesli nie => pobierz nastepnych i dodaj do listy
-    */
 }
 
 export default SearchEngine

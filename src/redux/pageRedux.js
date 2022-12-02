@@ -2,7 +2,7 @@
 export const getPage = ({page}) => page
 
 // actions
-const reducerName = 'getPage'
+const reducerName = 'page'
 const createActionName = name => `app/${reducerName}/${name}`
 
 export const SET_PAGE = createActionName("SET_PAGE")

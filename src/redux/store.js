@@ -2,10 +2,14 @@ import {applyMiddleware, combineReducers, createStore, compose} from "redux"
 import searchPhraseRedux from './searchPhraseRedux';
 import charactersRedux from './charactersRedux'
 import pageRedux from './pageRedux'
+import thunk from 'redux-thunk'
 
 const initialState = {
     searchPhrase: "",
-    charactersToShow: [],
+    charactersToShow: {
+        request: {pending: false, error: null, success: false},
+        data:[]
+    },
     page: 1
 }
 
@@ -22,7 +26,7 @@ const storeReducers = combineReducers(reducers)
 const store = createStore(
     storeReducers,
     initialState,
-    compose(applyMiddleware(), window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__())
+    compose(applyMiddleware(thunk), window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__())
 )
 
 export default store;
