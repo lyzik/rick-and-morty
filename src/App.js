@@ -1,6 +1,5 @@
 import './App.css';
 import { BrowserRouter, Routes, Route } from "react-router-dom"
-import { SearchBarInputContext } from './Contexts/SearchBarInputContext';
 import { useState } from 'react';
 import CharacterDetails from './components/CharacterDetails/CharacterDetails';
 import CharactersList from './components/CharactersList/CharactersListContainer';
