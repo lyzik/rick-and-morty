@@ -7,16 +7,11 @@ import SearchEngine from "../SearchEngine/SearchEngineContainer";
 import * as Styled from "./CharactersList.styles"
 
 
-const CharactersList = ( {input, charactersToShow, setCharactersToShow, page, setPage, loadCharacters} ) => {
-
+const CharactersList = ( {input, charactersToShow, setCharactersToShow, page, setPage, loadCharacters, resetCharacters} ) => {
     function LoadMoreCharacters(){
         setPage(page + 1)
     }
-    
-    function ResetCharacters(){
-        setCharactersToShow([])
-    }
-    
+
     useEffect(() => {
         loadCharacters(page, input)
 
@@ -45,7 +40,7 @@ const CharactersList = ( {input, charactersToShow, setCharactersToShow, page, se
                     charactersToShow ? charactersToShow.map(character => 
                         ( 
                             <Link key={character.id} to={`/character/${character.id}`} style={{textDecoration: "none"}}
-                            onClick={ResetCharacters}>
+                            onClick={resetCharacters}>
                                 <CharactersListElement character={character}/>
                             </Link>
                         )) : <h1>Character does not exist</h1>

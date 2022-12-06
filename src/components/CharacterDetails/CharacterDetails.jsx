@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from "react";
-import { Link, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import * as Styled from "./CharacterDetails.styles"
 
-const CharacterDetails = () => {
+const CharacterDetails = ({page, setPage}) => {
+    setPage(1)
     let {id} = useParams() // TODO: http://localhost:3000/character/234235345345 
 
     const [character, setCharacter] = useState({})
@@ -41,7 +42,7 @@ const CharacterDetails = () => {
                 </div>
             </Styled.Container>
             )
-        }else if(fetchStatus == false){
+        }else if(fetchStatus === false){
             return <div>Character doesn't exist</div>
         }
 }

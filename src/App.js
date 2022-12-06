@@ -1,7 +1,7 @@
 import './App.css';
 import { BrowserRouter, Routes, Route } from "react-router-dom"
 import { useState } from 'react';
-import CharacterDetails from './components/CharacterDetails/CharacterDetails';
+import CharacterDetails from './components/CharacterDetails/CharacterDetailsContainer';
 import CharactersList from './components/CharactersList/CharactersListContainer';
 
 function App() {
