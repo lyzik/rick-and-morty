@@ -28,7 +28,6 @@ export const loadCharacters = (page, input) => {
             const result = await axios.get(`https://rickandmortyapi.com/api/character?page=${page}&name=${input}`)
             dispatch(setCharactersToShow(result.data.results))
             dispatch(endRequest())
-            setPage(1)
         } catch(e) {
             dispatch(errorRequest(e))
         }
