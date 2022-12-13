@@ -8,9 +8,13 @@ import * as Styled from "./CharactersList.styles"
 
 
 const CharactersList = ( {input, charactersToShow, setCharactersToShow, page, setPage, loadCharacters, resetCharacters} ) => {
-    function LoadMoreCharacters(){
-        setPage(page + 1)
-    }
+    const handleScroll = event => {
+        if((window.innerHeight + window.scrollY) >= document.body.offsetHeight){
+            setPage(page + 1)
+        }
+    };
+
+    window.addEventListener('scroll', handleScroll);
 
     useEffect(() => {
         loadCharacters(page, input)
@@ -31,7 +35,6 @@ const CharactersList = ( {input, charactersToShow, setCharactersToShow, page, se
     }, [page])
 
     return (
-        <>
         <div>
             <SearchEngine/>
             <SearchBar />        
@@ -46,9 +49,7 @@ const CharactersList = ( {input, charactersToShow, setCharactersToShow, page, se
                         )) : <h1>Character does not exist</h1>
                 }
             </Styled.Container>
-            <button onClick={LoadMoreCharacters}>GET NEXT</button>
         </div>
-        </>
     )
 
 }
