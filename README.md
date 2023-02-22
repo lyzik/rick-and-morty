@@ -13,6 +13,6 @@ App gives ability to check basic informations about every character!
 - The Rick and Morty API
 
 ## Link
-<a href="https://sianko-rickandmorty.netlify.app">https://morty-and-rick-characters.netlify.app</a>
+<a href="https://sianko-rickandmorty.netlify.app">https://sianko-rickandmorty.netlify.app</a>
 
 
